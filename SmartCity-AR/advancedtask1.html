@@ -27,6 +27,7 @@
          marker.addEventListener("markerFound", function (evt) {
             markerFound = 1;
             button.hidden = false;
+	    console.log("markerfound0: ", markerFound);	 
             // Video_0.play();  // if you want the video 
             // to start immediently on marker detection, uncomment this
           });
@@ -35,11 +36,13 @@
             markerFound = 0;
             Video_0.pause();
             button.hidden = true;
+	    console.log("markerLost0: ", markerFound);
           });
 		  
 	 marker1.addEventListener("markerFound", function (evt) {
             markerFound = 2;
             button.hidden = false;
+	    console.log("markerfound1: ", markerFound);
             // Video_0.play();  // if you want the video 
             // to start immediently on marker detection, uncomment this
           });
@@ -48,11 +51,12 @@
             markerFound = 0;
             Video_1.pause();
             button.hidden = true;
+	    console.log("markerLost1: ", markerFound);
           });
 
           // button for video play/pause
           button.addEventListener("click", function(evt){
-            console.log("button clicked: ", markerFound)
+            console.log("button clicked: ", markerFound);
             if(Video_0.muted==true && markerFound==1){
               button.innerHTML="Pause";
               Video_0.muted=false;
