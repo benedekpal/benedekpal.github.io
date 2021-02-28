@@ -14,15 +14,15 @@
         {
           var elem = document.documentElement;
           var marker = document.querySelector("#marker");
-		  var marker1 = document.querySelector("#marker_1");
+	  var marker1 = document.querySelector("#marker_1");
           var fullbutton = document.querySelector("#fullscreen");
           var Video_0 = document.querySelector("#Video_Asset_0");
-		  var Video_1 = document.querySelector("#Video_Asset_1");
+	  var Video_1 = document.querySelector("#Video_Asset_1");
           var button = document.querySelector("#mutebutton");
           button.hidden = true;
 		  
           Video_0.pause();
-		  Video_1.pause();
+	  Video_1.pause();
 
           marker.addEventListener("markerFound", function (evt) {
             markerFound = 1;
@@ -37,7 +37,7 @@
             button.hidden = true;
           });
 		  
-		  marker1.addEventListener("markerFound", function (evt) {
+	 marker1.addEventListener("markerFound", function (evt) {
             markerFound = 2;
             button.hidden = false;
             // Video_0.play();  // if you want the video 
@@ -57,17 +57,20 @@
               button.innerHTML="Pause";
               Video_0.muted=false;
               Video_0.play();
+	      console.log('start 0');
             }
-			else if(Video_1.muted==true && markerFound==2){
+	    else if(Video_1.muted==true && markerFound==2){
               button.innerHTML="Pause";
               Video_1.muted=false;
               Video_1.play();
+              console.log('start 1');
             }
-			else{
+	    else{
+	      console.log('pause');
               button.innerHTML="Play";
               Video_0.muted=true;
               Video_0.pause();
-			  Video_1.muted=true;
+              Video_1.muted=true;
               Video_1.pause();
             }
           });
@@ -90,7 +93,8 @@
                 }
                 fullbutton.setAttribute("src", "assets/exit_fullscreen.png");
                 fullscreen = 1;
-              } else {
+              	} 
+		else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.webkitExitFullscreen) {
