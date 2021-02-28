@@ -1,4 +1,5 @@
 <!-- from https://gist.github.com/RobTranquillo/8132191d48596dae68cef8e9cf48f812 -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,64 +23,55 @@
 		  
           Video_0.pause();
 		  Video_1.pause();
-         marker.addEventListener("markerFound", function (evt) {
+
+          marker.addEventListener("markerFound", function (evt) {
             markerFound = 1;
             button.hidden = false;
-	    console.log("markerfound0: ", markerFound);	 
             // Video_0.play();  // if you want the video 
             // to start immediently on marker detection, uncomment this
           });
-         marker.addEventListener("markerLost", function (evt) {
+
+          marker.addEventListener("markerLost", function (evt) {
             markerFound = 0;
             Video_0.pause();
             button.hidden = true;
-	    console.log("markerLost0: ", markerFound);
           });
 		  
-	 marker1.addEventListener("markerFound", function (evt) {
+		  marker1.addEventListener("markerFound", function (evt) {
             markerFound = 2;
             button.hidden = false;
-	    console.log("markerfound1: ", markerFound);
             // Video_0.play();  // if you want the video 
             // to start immediently on marker detection, uncomment this
           });
+
           marker1.addEventListener("markerLost", function (evt) {
             markerFound = 0;
             Video_1.pause();
             button.hidden = true;
-	    console.log("markerLost1: ", markerFound);
           });
+
           // button for video play/pause
           button.addEventListener("click", function(evt){
-            console.log("button clicked: ", markerFound);
+            console.log("button clicked")
             if(Video_0.muted==true && markerFound==1){
               button.innerHTML="Pause";
               Video_0.muted=false;
               Video_0.play();
             }
-	    else if(button.innerHTML=="Pause" && markerFound==1){
-              button.innerHTML="Play";
-              Video_0.muted=true;
-              Video_0.pause();
-            }
-	    else if(Video_1.muted==true && markerFound==2){
+			else if(Video_1.muted==true && markerFound==2){
               button.innerHTML="Pause";
               Video_1.muted=false;
               Video_1.play();
             }
-            else if(button.innerHTML=="Pause" && markerFound==2){
-              button.innerHTML="Play";
-              Video_1.muted=true;
-              Video_1.pause();
-            }
-	    else if(markerFound==0){
+			else{
               button.innerHTML="Play";
               Video_0.muted=true;
               Video_0.pause();
-	      Video_1.muted=true;
+			  Video_1.muted=true;
               Video_1.pause();
             }
           });
+
           // button for full screen
           fullbutton.addEventListener("click",
             function (evt){
