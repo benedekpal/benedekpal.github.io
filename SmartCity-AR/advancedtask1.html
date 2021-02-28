@@ -1,5 +1,4 @@
 <!-- from https://gist.github.com/RobTranquillo/8132191d48596dae68cef8e9cf48f812 -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
   <!-- we import arjs version without NFT but with marker + location based support -->
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <!-- this part defines the playback / control function and events -->
-    <script>
+  <script>
     var markerFound = 0;
     AFRAME.registerComponent('button', {
         init: function ()
@@ -19,8 +18,6 @@
           var Video_0 = document.querySelector("#Video_Asset_0");
 		  var Video_1 = document.querySelector("#Video_Asset_1");
           var button = document.querySelector("#mutebutton");
-	  var buttonnum = 1;
-	  var buttoncount = 0;
           button.hidden = true;
 		  
           Video_0.pause();
@@ -36,7 +33,6 @@
             markerFound = 0;
             Video_0.pause();
             button.hidden = true;
-	    button.innerHTML="Play";
 	    console.log("markerLost0: ", markerFound);
           });
 		  
@@ -44,51 +40,45 @@
             markerFound = 2;
             button.hidden = false;
 	    console.log("markerfound1: ", markerFound);
+            // Video_0.play();  // if you want the video 
+            // to start immediently on marker detection, uncomment this
           });
           marker1.addEventListener("markerLost", function (evt) {
             markerFound = 0;
             Video_1.pause();
             button.hidden = true;
-	    button.innerHTML="Play";
 	    console.log("markerLost1: ", markerFound);
           });
           // button for video play/pause
           button.addEventListener("click", function(evt){
-	    console.log("button clicked")
-	    buttoncount = buttoncount + 1;
-	    if (buttoncount <= buttonnum){
-	    if(markerFound==1){
-		if(Video_0.muted==true){
-              		button.innerHTML="Pause";
-              		Video_0.muted=false;
-              		Video_0.play();
-			console.log('vid0 plays');
-            		}
-	    	else{
-              		button.innerHTML="Play";
-              		Video_0.muted=true;
-              		Video_0.pause();
-			console.log('vid0 stopped');
-            		}	   
-	    	}
-	    else if(markerFound==2){
-		if(Video_1.muted==true){
-              		button.innerHTML="Pause";
-              		Video_1.muted=false;
-              		Video_1.play();
-			console.log('vid1 plays');
-            		}
-	    	else{
-              		button.innerHTML="Play";
-              		Video_1.muted=true;
-              		Video_1.pause();
-			console.log('vid1 stopped');
-            		}	   
-	    	} 
-	    }
-            else{
-	    	buttoncount = 0;
-	    }
+            console.log("button clicked: ", markerFound);
+            if(Video_0.muted==true && markerFound==1){
+              button.innerHTML="Pause";
+              Video_0.muted=false;
+              Video_0.play();
+            }
+	    else if(button.innerHTML=="Play" && markerFound==1){
+              button.innerHTML="Play";
+              Video_0.muted=true;
+              Video_0.pause();
+            }
+	    else if(Video_1.muted==true && markerFound==2){
+              button.innerHTML="Pause";
+              Video_1.muted=false;
+              Video_1.play();
+            }
+            else if(button.innerHTML=="Play" && markerFound==2){
+              button.innerHTML="Play";
+              Video_1.muted=true;
+              Video_1.pause();
+            }
+	    else if(markerFound==0){
+              button.innerHTML="Play";
+              Video_0.muted=true;
+              Video_0.pause();
+	      Video_1.muted=true;
+              Video_1.pause();
+            }
           });
           // button for full screen
           fullbutton.addEventListener("click",
@@ -126,7 +116,7 @@
         tick: function (totalTime, deltaTime)
         {
             var dTime = deltaTime / 1000;
-            if (markerFound > 0) {
+            if (markerFound >= 0) {
             }
         }
       });
