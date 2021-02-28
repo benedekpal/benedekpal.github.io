@@ -19,6 +19,8 @@
           var Video_0 = document.querySelector("#Video_Asset_0");
 		  var Video_1 = document.querySelector("#Video_Asset_1");
           var button = document.querySelector("#mutebutton");
+	  var buttonnum = 1;
+	  var buttoncount = 0;
           button.hidden = true;
 		  
           Video_0.pause();
@@ -34,6 +36,7 @@
             markerFound = 0;
             Video_0.pause();
             button.hidden = true;
+	    button.innerHTML="Play";
 	    console.log("markerLost0: ", markerFound);
           });
 		  
@@ -48,11 +51,14 @@
             markerFound = 0;
             Video_1.pause();
             button.hidden = true;
+	    button.innerHTML="Play";
 	    console.log("markerLost1: ", markerFound);
           });
           // button for video play/pause
           button.addEventListener("click", function(evt){
 	    console.log("button clicked")
+	    buttoncount = buttoncount + 1;
+	    if (buttoncount <= buttonnum){
 	    if(markerFound==1){
 		if(Video_0.muted==true){
               		button.innerHTML="Pause";
@@ -79,6 +85,10 @@
 			console.log('vid1 stopped');
             		}	   
 	    	} 
+	    }
+            else{
+	    	buttoncount = 0;
+	    }
           });
           // button for full screen
           fullbutton.addEventListener("click",
