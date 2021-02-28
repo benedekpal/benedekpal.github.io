@@ -62,6 +62,7 @@
               button.innerHTML="Play";
               Video_0.muted=true;
               Video_0.pause();
+	      console.log('video_0 pause in button.innerHTML==Pause && markerFound==1');
             }
 	    else if(Video_1.muted==true && markerFound==2){
               button.innerHTML="Pause";
@@ -72,6 +73,7 @@
               button.innerHTML="Play";
               Video_1.muted=true;
               Video_1.pause();
+	      console.log('video_1 pause in button.innerHTML==Pause && markerFound==2');
             }
 	    else if(markerFound==0){
               button.innerHTML="Play";
@@ -79,6 +81,7 @@
               Video_0.pause();
 	      Video_1.muted=true;
               Video_1.pause();
+	      console.log('video_0_1 pause');
             }
           });
           // button for full screen
@@ -117,7 +120,7 @@
         tick: function (totalTime, deltaTime)
         {
             var dTime = deltaTime / 1000;
-            if (markerFound >= 0) {
+            if (markerFound > 0) {
             }
         }
       });
