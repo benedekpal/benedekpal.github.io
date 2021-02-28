@@ -58,16 +58,16 @@
               Video_0.muted=false;
               Video_0.play();
             }
-			else if(Video_1.muted==true && markerFound==2){
+	    else if(Video_1.muted==true && markerFound==2){
               button.innerHTML="Pause";
               Video_1.muted=false;
               Video_1.play();
             }
-			else{
+	    else if(markerFound==0){
               button.innerHTML="Play";
               Video_0.muted=true;
               Video_0.pause();
-			  Video_1.muted=true;
+	      Video_1.muted=true;
               Video_1.pause();
             }
           });
